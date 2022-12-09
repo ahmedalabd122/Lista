@@ -1,0 +1,4 @@
+#Tue Dec 06 00:16:50 EET 2022
+base.0=/Users/ahmedmohamedalabd/Dev/Angula/lista/build/app/intermediates/dex/release/minifyReleaseWithR8/classes.dex
+renamed.0=classes.dex
+path.0=classes.dex

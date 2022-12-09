@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "/Users/ahmedmohamedalabd/Dev/Angula/lista/build/assets_audio_player/intermediates/merged_res/release/drawable/notification_icon_background.xml",
+        "source": "/Users/ahmedmohamedalabd/.gradle/caches/transforms-3/5e083c06c9925c2309f02468fc66e376/transformed/core-1.7.0/res/drawable/notification_icon_background.xml"
+    },
+    {
+        "merged": "/Users/ahmedmohamedalabd/Dev/Angula/lista/build/assets_audio_player/intermediates/merged_res/release/drawable/notification_tile_bg.xml",
+        "source": "/Users/ahmedmohamedalabd/.gradle/caches/transforms-3/5e083c06c9925c2309f02468fc66e376/transformed/core-1.7.0/res/drawable/notification_tile_bg.xml"
+    },
+    {
+        "merged": "/Users/ahmedmohamedalabd/Dev/Angula/lista/build/assets_audio_player/intermediates/merged_res/release/drawable/exo_rounded_rectangle.xml",
+        "source": "/Users/ahmedmohamedalabd/.gradle/caches/transforms-3/63e145fb04ab7064b0f9f3c34348408d/transformed/jetified-exoplayer-ui-2.18.1/res/drawable/exo_rounded_rectangle.xml"
+    },
+    {
+        "merged": "/Users/ahmedmohamedalabd/Dev/Angula/lista/build/assets_audio_player/intermediates/merged_res/release/drawable/notification_bg_low.xml",
+        "source": "/Users/ahmedmohamedalabd/.gradle/caches/transforms-3/5e083c06c9925c2309f02468fc66e376/transformed/core-1.7.0/res/drawable/notification_bg_low.xml"
+    },
+    {
+        "merged": "/Users/ahmedmohamedalabd/Dev/Angula/lista/build/assets_audio_player/intermediates/merged_res/release/drawable/notification_bg.xml",
+        "source": "/Users/ahmedmohamedalabd/.gradle/caches/transforms-3/5e083c06c9925c2309f02468fc66e376/transformed/core-1.7.0/res/drawable/notification_bg.xml"
+    }
+]
