@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/ahmedmohamedalabd/Dev/Angula/lista/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-ar/values-ar.xml",
+            "outputFile": "/Users/ahmedmohamedalabd/Dev/Lista/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-ar/values-ar.xml",
             "map": [
                 {
                     "source": "/Users/ahmedmohamedalabd/.gradle/caches/transforms-3/6ec2c823b2ddfa9d4aff16fd99b56b89/transformed/jetified-exoplayer-core-2.18.1/res/values-ar/values-ar.xml",
