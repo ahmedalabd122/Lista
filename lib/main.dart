@@ -19,9 +19,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (BuildContext context) {
+        // final _tasksBox = Hive.box('tasksBox');
+        // if (_tasksBox.get('tasksBox') == null) {
+        //   Provider.of<TaskData>(context).loadData();
+        // } else {
+        //   Provider.of<TaskData>(context).createInitialData();
+        // }
+        
         return TaskData();
       },
-      child: const MaterialApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: TasksScreen(),
       ),

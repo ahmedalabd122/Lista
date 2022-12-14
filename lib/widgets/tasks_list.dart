@@ -1,6 +1,7 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:lista/models/task_data.dart';
@@ -10,6 +11,7 @@ class ListaListView extends StatelessWidget {
   AudioPlayer audio = AudioPlayer();
   AudioPlayer audio2 = AudioPlayer();
   final assetSound = AssetsAudioPlayer();
+  final _tasksBox = Hive.box('tasksBox');
   @override
   Widget build(BuildContext context) {
     return Consumer<TaskData>(
@@ -17,6 +19,11 @@ class ListaListView extends StatelessWidget {
         return ListView.separated(
           itemCount: taskData.taskCount,
           itemBuilder: (BuildContext context, int index) {
+            // if (_tasksBox.get('tasksBox')) {
+            //   Provider.of<TaskData>(context).loadData();
+            // } else {
+            //   Provider.of<TaskData>(context).createInitialData();
+            // }
             final task = taskData.tasks[index];
             return Dismissible(
               direction: DismissDirection.startToEnd,

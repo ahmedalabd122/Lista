@@ -1,4 +1,4 @@
-#Mon Dec 12 12:36:20 EET 2022
+#Mon Dec 12 14:09:24 EET 2022
 base.1=/Users/ahmedmohamedalabd/Dev/Lista/build/app/intermediates/dex/debug/mergeDexDebug/classes2.dex
 path.1=classes2.dex
 base.0=/Users/ahmedmohamedalabd/Dev/Lista/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex

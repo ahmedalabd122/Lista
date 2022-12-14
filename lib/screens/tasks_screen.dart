@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:lista/models/task_data.dart';
 import 'package:lista/screens/add_task_screen.dart';
 import 'package:lista/widgets/tasks_list.dart';
 import 'package:provider/provider.dart';
 
 class TasksScreen extends StatelessWidget {
-  const TasksScreen({Key? key}) : super(key: key);
+  TasksScreen({Key? key}) : super(key: key);
+  final _tasksBox = Hive.box('tasksBox');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
