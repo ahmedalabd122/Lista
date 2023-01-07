@@ -37,7 +37,7 @@ class CategoriesData extends ChangeNotifier {
     } else {
       _tasksCategories = box.values.toList();
     }
-    print(_tasksCategories.first.category);
+    //print(_tasksCategories.first.category);
     notifyListeners();
   }
 

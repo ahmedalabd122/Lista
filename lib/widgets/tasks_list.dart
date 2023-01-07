@@ -10,7 +10,7 @@ import 'package:lista/widgets/tasks_tile.dart';
 class ListaListView extends StatelessWidget {
   AudioPlayer audio = AudioPlayer(playerId: '1');
   AudioPlayer audio2 = AudioPlayer(playerId: '2');
-  
+
   @override
   Widget build(BuildContext context) {
     return Consumer<TaskData>(
@@ -76,7 +76,7 @@ class ListaListView extends StatelessWidget {
               key: Key(task.id.toString()),
               onDismissed: (direction) {
                 audio2.play(AssetSource('bravo.wav'));
-                taskData.deleteTask(task, index);
+                taskData.deleteTask( index);
               },
               child: Card(
                 elevation: 5,

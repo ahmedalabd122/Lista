@@ -48,7 +48,7 @@ class CatigoryList extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 20, top: 20),
                         child: Text(
-                          '${Provider.of<TaskData>(context).getTasksByCategory(cat).length}tasks',
+                          '${Provider.of<TaskData>(context).getTasksByCategory(cat).length} tasks',
                           style: const TextStyle(
                             color: Color.fromARGB(146, 9, 32, 51),
                             fontWeight: FontWeight.w500,

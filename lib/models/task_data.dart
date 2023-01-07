@@ -80,9 +80,9 @@ class TaskData extends ChangeNotifier {
     getItems();
   }
 
-  void deleteTask(Task task, int index) async {
+  Future deleteTask(int index) async {
     Box<Task> box = await Hive.openBox<Task>(taskHiveBox);
-    _tasks.remove(task);
+    _tasks.removeAt(index);
     if (box.isNotEmpty) {
       await box.deleteAt(index);
       getItems();
@@ -91,21 +91,89 @@ class TaskData extends ChangeNotifier {
     }
   }
 
+  Future deleteAllDataByCategory(String category) async {
+    Box<Task> box = await Hive.openBox<Task>(taskHiveBox);
+    List<int> ind;
+    ind = await mapTasksByCategory(category);
+    for (int i = 0; i < ind.length; i++) {
+      _tasks.removeAt(i);
+      await box.deleteAt(i);
+    }
+    notifyListeners();
+    getItemsByCat(category);
+    getItems();
+  }
+
+  void getItemsByCat(String category) async {
+    Box<Task> box = await Hive.openBox<Task>(taskHiveBox);
+    if (box.isEmpty) {
+      await Future.delayed(const Duration(seconds: 1));
+      if (_tasks.isEmpty) {
+        _tasks = [
+          Task(
+            taskName: 'Add new Task below',
+            isDone: false,
+            category: 'personal',
+          ),
+        ];
+      } else if (_tasks.first.isDone == true) {
+        _tasks = [
+          Task(
+            taskName: 'Add new Task below',
+            isDone: true,
+            category: 'personal',
+          ),
+        ];
+      } else {
+        _tasks = [
+          Task(
+            taskName: 'Add new Task below',
+            isDone: false,
+            category: 'personal',
+          ),
+        ];
+      }
+    } else {
+      getDoneTasksByCategory(category);
+    }
+
+    notifyListeners();
+  }
+
+  List<Task> _gTBC = [];
+
   UnmodifiableListView<Task> getTasksByCategory(String category) {
-    List<Task> _gTBC = [];
+    _gTBC = [];
     _gTBC.addAll(_tasks);
 
     _gTBC.retainWhere((taskOne) => taskOne.category == category);
+
     return UnmodifiableListView(_gTBC);
   }
 
-  List<Task> getDoneTasksByCategory(String category) {
-    List<Task> gTBC = [];
-    gTBC.addAll(_tasks);
+  Future<List<int>> mapTasksByCategory(String category) async {
+    Box<Task> box = await Hive.openBox<Task>(taskHiveBox);
 
-    gTBC.retainWhere(
+    List<int> map = [];
+    if (box.isNotEmpty) {
+      for (int i = 0; i < _tasks.length; i++) {
+        if (_tasks[i].category == category) {
+          map.add(i);
+        }
+      }
+    } else {
+      return map;
+    }
+    return map;
+  }
+
+  List<Task> getDoneTasksByCategory(String category) {
+    List<Task> _gDTBC = [];
+    _gDTBC.addAll(_tasks);
+    _gDTBC.retainWhere(
         (taskOne) => taskOne.category == category && taskOne.isDone == true);
-    return gTBC;
+
+    return _gDTBC;
   }
 
   void deleteAllData() async {

@@ -1,4 +1,5 @@
 import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lista/data/theme.dart';
 import 'package:lista/models/task_data.dart';
@@ -22,7 +23,96 @@ class CatigoryTasksScreen extends StatelessWidget {
       body: Container(
         color: AppColors.backgroundWhite,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 25, top: 10),
+              child: Text(
+                category,
+                style: const TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                ),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 30, top: 10),
+                  child: Text(
+                    '${Provider.of<TaskData>(context).getTasksByCategory(category).length} tasks',
+                    style: const TextStyle(
+                      color: Color.fromARGB(146, 9, 32, 51),
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                    ),
+                  ),
+                ),
+                const Spacer(),
+                // if (Provider.of<TaskData>(context)
+                //         .getTasksByCategory(category)
+                //         .length >
+                //     1)
+                //   CupertinoButton(
+                //     child: const Text(
+                //       'Delete all',
+                //       style: TextStyle(
+                //         color: Colors.red,
+                //         fontSize: 15,
+                //         fontWeight: FontWeight.normal,
+                //       ),
+                //     ),
+                //     onPressed: () {
+                //       showCupertinoDialog(
+                //         context: context,
+                //         builder: ((context) {
+                //           return CupertinoAlertDialog(
+                //             title: const Text(
+                //               'Do you want to delete all tasks?',
+                //               textAlign: TextAlign.center,
+                //               style: TextStyle(
+                //                 color: Colors.red,
+                //                 fontSize: 15,
+                //                 fontWeight: FontWeight.normal,
+                //               ),
+                //             ),
+                //             actions: [
+                //               CupertinoDialogAction(
+                //                 child: const Text('Yes'),
+                //                 onPressed: () {
+                //                   Provider.of<TaskData>(context, listen: false)
+                //                       .deleteAllDataByCategory(
+                //                     category,
+                //                   );
+                //                   Navigator.pop(context);
+                //                 },
+                //               ),
+                //               CupertinoDialogAction(
+                //                 child: const Text('Cancel'),
+                //                 onPressed: () {
+                //                   Navigator.pop(context);
+                //                 },
+                //               ),
+                //             ],
+                //           );
+                //         }),
+                //       );
+                //     },
+                //   ),
+                // if (Provider.of<TaskData>(context)
+                //         .getTasksByCategory(category)
+                //         .length <=
+                //     1)
+                //   const SizedBox(
+                //     height: 50,
+                //   ),
+                // const SizedBox(
+                //   width: 25,
+                // ),
+              ],
+            ),
             Expanded(
               child: Container(
                 padding:
@@ -96,7 +186,7 @@ class CatigoryTasksScreen extends StatelessWidget {
                           key: Key(task.id.toString()),
                           onDismissed: (direction) {
                             audio2.play(AssetSource('bravo.wav'));
-                            taskData.deleteTask(task, index);
+                            taskData.deleteTask(index);
                           },
                           child: Card(
                             elevation: 5,
