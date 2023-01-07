@@ -11,18 +11,22 @@ class ListaTile extends StatelessWidget {
   final String taskTile;
   final Function(bool?)? checkBoxCallback;
   final int index;
-  const ListaTile({
+  final String taskcategory;
+
+  ListaTile({
     super.key,
     required this.isChecked,
     required this.taskTile,
     required this.checkBoxCallback,
     required this.index,
+    required this.taskcategory,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: ListaCheckBox(
+        color: catColors[taskcategory],
         checkBoxState: isChecked,
         toggleCheckboxState: checkBoxCallback,
       ),
@@ -33,6 +37,7 @@ class ListaTile extends StatelessWidget {
             PageTransition(
               type: PageTransitionType.fade,
               child: EditTaskScreen(
+                category: taskcategory,
                 index: index,
                 taskName: taskTile,
               ),

@@ -10,7 +10,7 @@ import 'package:lista/widgets/tasks_tile.dart';
 class ListaListView extends StatelessWidget {
   AudioPlayer audio = AudioPlayer(playerId: '1');
   AudioPlayer audio2 = AudioPlayer(playerId: '2');
-
+  
   @override
   Widget build(BuildContext context) {
     return Consumer<TaskData>(
@@ -84,6 +84,7 @@ class ListaListView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListaTile(
+                  taskcategory: task.category,
                   index: index,
                   taskTile: task.taskName,
                   isChecked: task.isDone,
@@ -96,9 +97,11 @@ class ListaListView extends StatelessWidget {
                       );
                       fade(1.0, 0.0, 1000, audio);
                       Future.delayed(
-                          const Duration(seconds: 4, milliseconds: 900), () {
-                        audio.dispose();
-                      });
+                        const Duration(seconds: 4, milliseconds: 900),
+                        () {
+                          audio.dispose();
+                        },
+                      );
                     }
                     if (checkboxState == false) {
                       fade(0.0, 1.0, 400, audio);

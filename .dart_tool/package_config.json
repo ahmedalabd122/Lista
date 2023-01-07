@@ -206,6 +206,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "dropdown_button2",
+      "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/dropdown_button2-1.9.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "fake_async",
       "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.3.1",
       "packageUri": "lib/",
@@ -226,6 +232,12 @@
     {
       "name": "fixnum",
       "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/fixnum-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "floodfill_image",
+      "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/floodfill_image-0.0.8",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -254,6 +266,18 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "flutter_svg",
+      "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-1.1.6",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "flutter_svg_provider",
+      "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg_provider-1.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "flutter_test",
       "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/packages/flutter_test",
       "packageUri": "lib/",
@@ -268,18 +292,6 @@
     {
       "name": "frontend_server_client",
       "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/frontend_server_client-3.2.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "get",
-      "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/get-4.6.5",
-      "packageUri": "lib/",
-      "languageVersion": "2.15"
-    },
-    {
-      "name": "get_storage",
-      "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/get_storage-2.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -342,6 +354,12 @@
       "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/image-3.2.2",
       "packageUri": "lib/",
       "languageVersion": "2.15"
+    },
+    {
+      "name": "intl",
+      "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.18.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "io",
@@ -418,6 +436,18 @@
     {
       "name": "path",
       "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_drawing",
+      "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/path_drawing-1.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "path_parsing",
+      "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/path_parsing-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -584,6 +614,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "syncfusion_flutter_core",
+      "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_core-20.4.42",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "syncfusion_flutter_sliders",
+      "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/syncfusion_flutter_sliders-20.4.42",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "term_glyph",
       "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/term_glyph-1.2.1",
       "packageUri": "lib/",
@@ -668,7 +710,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-01-02T13:16:43.433476Z",
+  "generated": "2023-01-07T13:32:59.244033Z",
   "generator": "pub",
   "generatorVersion": "2.18.5"
 }

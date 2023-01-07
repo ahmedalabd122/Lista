@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
+options: "eabefef43df60c6dcdb03b527743b64ec325b718d0e381206a868b25774abfe1"
+build_start_time: [1672710119, 469472885]
+build_end_time: [1672710119, 530261993]
+inputs:
+  ? "/Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/assets_audio_player_web-3.0.6/macos/Classes/AssetsAudioPlayerWebPlugin.swift"
+  : !private [1670277590, 239133]

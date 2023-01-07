@@ -44,9 +44,13 @@ dependencies:
   hive: ^2.0.5
   hive_flutter: ^1.1.0
   uuid: ^3.0.7
-  get_storage: ^2.0.3
   page_transition: ^2.0.9
   flutter_native_splash: ^2.2.16
+  dropdown_button2: ^1.9.2
+  syncfusion_flutter_sliders: ^20.4.42
+  flutter_svg: ^1.1.6
+  flutter_svg_provider: ^1.0.3
+  floodfill_image: ^0.0.8
 
 dev_dependencies:
   flutter_test:

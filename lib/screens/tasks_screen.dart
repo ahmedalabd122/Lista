@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:lista/data/theme.dart';
 import 'package:lista/models/task_data.dart';
 import 'package:lista/screens/add_task_screen.dart';
+import 'package:lista/widgets/catigory_list.dart';
 import 'package:lista/widgets/tasks_list.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -12,7 +13,6 @@ class TasksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<TaskData>(context).getItems;
     return Scaffold(
       drawerScrimColor: Colors.white,
       backgroundColor: AppColors.backgroundWhite,
@@ -84,6 +84,10 @@ class TasksScreen extends StatelessWidget {
               ),
               textAlign: TextAlign.start,
             ),
+          ),
+          Expanded(
+            child: CatigoryList(),
+            flex: 2,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -162,14 +166,11 @@ class TasksScreen extends StatelessWidget {
             ],
           ),
           Expanded(
+            flex: 6,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               decoration: const BoxDecoration(
                 color: AppColors.backgroundWhite,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(25),
-                  topRight: Radius.circular(25),
-                ),
               ),
               child: ListaListView(),
             ),

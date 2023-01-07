@@ -18,3 +18,9 @@ class AppColors {
 
   static const Color stateColorFailure = Color(0xffEB5757);
 }
+
+Map<String, Color> catColors = {
+  'personal': Colors.blue,
+  'business': Colors.green,
+  'purple': Colors.purple,
+};
