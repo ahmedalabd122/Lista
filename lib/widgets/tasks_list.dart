@@ -76,7 +76,7 @@ class ListaListView extends StatelessWidget {
               key: Key(task.id.toString()),
               onDismissed: (direction) {
                 audio2.play(AssetSource('bravo.wav'));
-                taskData.deleteTask( index);
+                taskData.deleteTask(index);
               },
               child: Card(
                 elevation: 5,
@@ -84,6 +84,7 @@ class ListaListView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: ListaTile(
+                  id: task.id,
                   taskcategory: task.category,
                   index: index,
                   taskTile: task.taskName,

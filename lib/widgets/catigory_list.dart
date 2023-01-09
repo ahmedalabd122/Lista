@@ -1,11 +1,8 @@
-import 'dart:math';
-
-import 'package:flutter/cupertino.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:lista/data/theme.dart';
 import 'package:lista/models/categories_data.dart';
 import 'package:lista/models/task_data.dart';
-import 'package:lista/screens/add_task_screen.dart';
 import 'package:lista/screens/catigory_tasks_screen.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
@@ -17,13 +14,19 @@ class CatigoryList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CategoriesData>(
       builder: ((context, category, child) {
-        return ListView.builder(
+        return Swiper(
+          layout: SwiperLayout.STACK,
+          itemWidth: MediaQuery.of(context).size.width / 1.5,
           scrollDirection: Axis.horizontal,
+          physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics(),
+          ),
           itemCount: category.categories.length,
           itemBuilder: (BuildContext context, int index) {
             String cat = category.categories[index].category;
-            return CupertinoButton(
-              onPressed: () {
+            return InkWell(
+              borderRadius: BorderRadius.circular(20),
+              onTap: () {
                 Navigator.push(
                   context,
                   PageTransition(
@@ -34,19 +37,21 @@ class CatigoryList extends StatelessWidget {
                   ),
                 );
               },
-              child: SizedBox(
-                width: 270,
-                height: 400,
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  elevation: 3,
+              child: Card(
+                margin: const EdgeInsets.all(10),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                elevation: 3,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      const Spacer(),
                       Padding(
-                        padding: const EdgeInsets.only(left: 20, top: 20),
+                        padding: const EdgeInsets.only(left: 20.0),
                         child: Text(
                           '${Provider.of<TaskData>(context).getTasksByCategory(cat).length} tasks',
                           style: const TextStyle(
@@ -57,8 +62,7 @@ class CatigoryList extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(
-                            left: 20, top: 10, bottom: 10),
+                        padding: const EdgeInsets.only(left: 20.0),
                         child: Text(
                           cat,
                           style: const TextStyle(
@@ -99,6 +103,7 @@ class CatigoryList extends StatelessWidget {
                           onChanged: null,
                         ),
                       ),
+                      const Spacer(),
                     ],
                   ),
                 ),

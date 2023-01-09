@@ -73,9 +73,17 @@ class TaskData extends ChangeNotifier {
     notifyListeners();
   }
 
-  void editTask(Task task, int index) async {
+  int getIndexById(String id) {
+    int index = 0;
+    index = _tasks.indexWhere((element) => element.id == id);
+    return index;
+  }
+
+  void editTask(Task task, String id) async {
     Box<Task> box = await Hive.openBox<Task>(taskHiveBox);
     task.editTaskName(task.taskName);
+    int index = getIndexById(id);
+    _tasks[index].taskName = task.taskName;
     if (box.isNotEmpty) await box.putAt(index, task);
     getItems();
   }
@@ -91,16 +99,24 @@ class TaskData extends ChangeNotifier {
     }
   }
 
+  Future deleteTaskFromCategory(String id) async {
+    Box<Task> box = await Hive.openBox<Task>(taskHiveBox);
+    _tasks.removeWhere((task) => task.id == id);
+    if (box.isNotEmpty) {
+      _tasks.removeWhere((task) => task.id == id);
+      await box.clear();
+      box.addAll(_tasks);
+      getItems();
+    } else {
+      getItems();
+    }
+  }
+
   Future deleteAllDataByCategory(String category) async {
     Box<Task> box = await Hive.openBox<Task>(taskHiveBox);
-    List<int> ind;
-    ind = await mapTasksByCategory(category);
-    for (int i = 0; i < ind.length; i++) {
-      _tasks.removeAt(i);
-      await box.deleteAt(i);
-    }
-    notifyListeners();
-    getItemsByCat(category);
+    _tasks.retainWhere((taskOne) => taskOne.category != category);
+    await box.clear();
+    box.addAll(_tasks);
     getItems();
   }
 
@@ -145,26 +161,8 @@ class TaskData extends ChangeNotifier {
   UnmodifiableListView<Task> getTasksByCategory(String category) {
     _gTBC = [];
     _gTBC.addAll(_tasks);
-
     _gTBC.retainWhere((taskOne) => taskOne.category == category);
-
     return UnmodifiableListView(_gTBC);
-  }
-
-  Future<List<int>> mapTasksByCategory(String category) async {
-    Box<Task> box = await Hive.openBox<Task>(taskHiveBox);
-
-    List<int> map = [];
-    if (box.isNotEmpty) {
-      for (int i = 0; i < _tasks.length; i++) {
-        if (_tasks[i].category == category) {
-          map.add(i);
-        }
-      }
-    } else {
-      return map;
-    }
-    return map;
   }
 
   List<Task> getDoneTasksByCategory(String category) {

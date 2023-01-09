@@ -13,12 +13,13 @@ class EditTaskScreen extends StatelessWidget {
   String? taskName;
   final int index;
   String category;
-
+  String id;
   EditTaskScreen({
     Key? key,
     required this.taskName,
     required this.index,
     required this.category,
+    required this.id,
   }) : super(key: key);
   TextEditingController controller = TextEditingController();
   @override
@@ -60,7 +61,7 @@ class EditTaskScreen extends StatelessWidget {
                     category: category,
                   );
                   Provider.of<TaskData>(context, listen: false)
-                      .editTask(task, index);
+                      .editTask(task, id);
                   Navigator.pop(context);
                 } else if (taskName == '') {
                   showDialog(
@@ -209,7 +210,6 @@ class EditTaskScreen extends StatelessWidget {
                               CupertinoIcons.largecircle_fill_circle,
                               color: catColors[category],
                             ),
-                            // Provider.of<CategoriesData>(context).color
                             onChanged: (value) {
                               category = value!;
                               Provider.of<CategoriesData>(context,

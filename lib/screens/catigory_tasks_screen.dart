@@ -51,66 +51,66 @@ class CatigoryTasksScreen extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                // if (Provider.of<TaskData>(context)
-                //         .getTasksByCategory(category)
-                //         .length >
-                //     1)
-                //   CupertinoButton(
-                //     child: const Text(
-                //       'Delete all',
-                //       style: TextStyle(
-                //         color: Colors.red,
-                //         fontSize: 15,
-                //         fontWeight: FontWeight.normal,
-                //       ),
-                //     ),
-                //     onPressed: () {
-                //       showCupertinoDialog(
-                //         context: context,
-                //         builder: ((context) {
-                //           return CupertinoAlertDialog(
-                //             title: const Text(
-                //               'Do you want to delete all tasks?',
-                //               textAlign: TextAlign.center,
-                //               style: TextStyle(
-                //                 color: Colors.red,
-                //                 fontSize: 15,
-                //                 fontWeight: FontWeight.normal,
-                //               ),
-                //             ),
-                //             actions: [
-                //               CupertinoDialogAction(
-                //                 child: const Text('Yes'),
-                //                 onPressed: () {
-                //                   Provider.of<TaskData>(context, listen: false)
-                //                       .deleteAllDataByCategory(
-                //                     category,
-                //                   );
-                //                   Navigator.pop(context);
-                //                 },
-                //               ),
-                //               CupertinoDialogAction(
-                //                 child: const Text('Cancel'),
-                //                 onPressed: () {
-                //                   Navigator.pop(context);
-                //                 },
-                //               ),
-                //             ],
-                //           );
-                //         }),
-                //       );
-                //     },
-                //   ),
-                // if (Provider.of<TaskData>(context)
-                //         .getTasksByCategory(category)
-                //         .length <=
-                //     1)
-                //   const SizedBox(
-                //     height: 50,
-                //   ),
-                // const SizedBox(
-                //   width: 25,
-                // ),
+                if (Provider.of<TaskData>(context)
+                        .getTasksByCategory(category)
+                        .length >
+                    1)
+                  CupertinoButton(
+                    child: const Text(
+                      'Delete all',
+                      style: TextStyle(
+                        color: Colors.red,
+                        fontSize: 15,
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                    onPressed: () {
+                      showCupertinoDialog(
+                        context: context,
+                        builder: ((context) {
+                          return CupertinoAlertDialog(
+                            title: const Text(
+                              'Do you want to delete all tasks?',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 15,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            actions: [
+                              CupertinoDialogAction(
+                                child: const Text('Yes'),
+                                onPressed: () {
+                                  Provider.of<TaskData>(context, listen: false)
+                                      .deleteAllDataByCategory(
+                                    category,
+                                  );
+                                  Navigator.pop(context);
+                                },
+                              ),
+                              CupertinoDialogAction(
+                                child: const Text('Cancel'),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                              ),
+                            ],
+                          );
+                        }),
+                      );
+                    },
+                  ),
+                if (Provider.of<TaskData>(context)
+                        .getTasksByCategory(category)
+                        .length <=
+                    1)
+                  const SizedBox(
+                    height: 50,
+                  ),
+                const SizedBox(
+                  width: 25,
+                ),
               ],
             ),
             Expanded(
@@ -186,7 +186,7 @@ class CatigoryTasksScreen extends StatelessWidget {
                           key: Key(task.id.toString()),
                           onDismissed: (direction) {
                             audio2.play(AssetSource('bravo.wav'));
-                            taskData.deleteTask(index);
+                            taskData.deleteTaskFromCategory(task.id);
                           },
                           child: Card(
                             elevation: 5,
@@ -194,6 +194,7 @@ class CatigoryTasksScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: ListaTile(
+                              id: task.id,
                               taskcategory: task.category,
                               index: index,
                               taskTile: task.taskName,

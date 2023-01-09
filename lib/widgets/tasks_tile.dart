@@ -12,7 +12,7 @@ class ListaTile extends StatelessWidget {
   final Function(bool?)? checkBoxCallback;
   final int index;
   final String taskcategory;
-
+  String id;
   ListaTile({
     super.key,
     required this.isChecked,
@@ -20,6 +20,7 @@ class ListaTile extends StatelessWidget {
     required this.checkBoxCallback,
     required this.index,
     required this.taskcategory,
+    required this.id,
   });
 
   @override
@@ -37,6 +38,7 @@ class ListaTile extends StatelessWidget {
             PageTransition(
               type: PageTransitionType.fade,
               child: EditTaskScreen(
+                id: id,
                 category: taskcategory,
                 index: index,
                 taskName: taskTile,

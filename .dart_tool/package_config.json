@@ -140,6 +140,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "card_swiper",
+      "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/card_swiper-2.0.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "characters",
       "rootUri": "file:///Users/ahmedmohamedalabd/Dev/flutter/.pub-cache/hosted/pub.dartlang.org/characters-1.2.1",
       "packageUri": "lib/",
@@ -710,7 +716,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-01-07T13:32:59.244033Z",
+  "generated": "2023-01-09T20:47:48.693127Z",
   "generator": "pub",
   "generatorVersion": "2.18.5"
 }

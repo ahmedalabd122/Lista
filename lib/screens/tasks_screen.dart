@@ -72,9 +72,12 @@ class TasksScreen extends StatelessWidget {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Padding(
-            padding: EdgeInsets.only(left: 20, bottom: 20),
+            padding: EdgeInsets.only(
+              left: 20,
+            ),
             child: Text(
               'What\'s up!',
               style: TextStyle(
@@ -85,9 +88,18 @@ class TasksScreen extends StatelessWidget {
               textAlign: TextAlign.start,
             ),
           ),
-          Expanded(
+          const Padding(
+            padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
+            child: Text(
+              'CATEGORIES',
+              style: TextStyle(
+                color: Color.fromARGB(146, 9, 32, 51),
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+          const Expanded(
             child: CatigoryList(),
-            flex: 2,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -166,7 +178,7 @@ class TasksScreen extends StatelessWidget {
             ],
           ),
           Expanded(
-            flex: 6,
+            flex: 3,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               decoration: const BoxDecoration(
