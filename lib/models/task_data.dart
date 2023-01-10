@@ -28,6 +28,7 @@ class TaskData extends ChangeNotifier {
             taskName: 'Add new Task below',
             isDone: false,
             category: 'personal',
+            date: DateTime.now().toString(),
           ),
         ];
       } else if (_tasks.first.isDone == true) {
@@ -36,6 +37,7 @@ class TaskData extends ChangeNotifier {
             taskName: 'Add new Task below',
             isDone: true,
             category: 'personal',
+            date: DateTime.now().toString(),
           ),
         ];
       } else {
@@ -44,11 +46,13 @@ class TaskData extends ChangeNotifier {
             taskName: 'Add new Task below',
             isDone: false,
             category: 'personal',
+            date: DateTime.now().toString(),
           ),
         ];
       }
     } else {
       _tasks = box.values.toList();
+      sortByDate();
     }
 
     notifyListeners();
@@ -63,6 +67,7 @@ class TaskData extends ChangeNotifier {
     _tasks.add(task);
     await box.add(task);
     _tasks = box.values.toList();
+    sortByDate();
     notifyListeners();
   }
 
@@ -79,11 +84,12 @@ class TaskData extends ChangeNotifier {
     return index;
   }
 
-  void editTask(Task task, String id) async {
+  void editTask(Task task, String id, String date) async {
     Box<Task> box = await Hive.openBox<Task>(taskHiveBox);
     task.editTaskName(task.taskName);
     int index = getIndexById(id);
     _tasks[index].taskName = task.taskName;
+    _tasks[index].date = task.date;
     if (box.isNotEmpty) await box.putAt(index, task);
     getItems();
   }
@@ -130,6 +136,7 @@ class TaskData extends ChangeNotifier {
             taskName: 'Add new Task below',
             isDone: false,
             category: 'personal',
+            date: DateTime.now().toString(),
           ),
         ];
       } else if (_tasks.first.isDone == true) {
@@ -138,6 +145,7 @@ class TaskData extends ChangeNotifier {
             taskName: 'Add new Task below',
             isDone: true,
             category: 'personal',
+            date: DateTime.now().toString(),
           ),
         ];
       } else {
@@ -146,6 +154,7 @@ class TaskData extends ChangeNotifier {
             taskName: 'Add new Task below',
             isDone: false,
             category: 'personal',
+            date: DateTime.now().toString(),
           ),
         ];
       }
@@ -179,5 +188,9 @@ class TaskData extends ChangeNotifier {
     await box.clear();
     _tasks = box.values.toList();
     getItems();
+  }
+
+  void sortByDate() async {
+    _tasks.sort((a, b) => a.date.compareTo(b.date));
   }
 }

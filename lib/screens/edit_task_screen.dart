@@ -9,11 +9,12 @@ import 'package:lista/data/theme.dart';
 import 'package:lista/models/task.dart';
 import 'package:lista/models/task_data.dart';
 
-class EditTaskScreen extends StatelessWidget {
+class EditTaskScreen extends StatefulWidget {
   String? taskName;
   final int index;
   String category;
   String id;
+
   EditTaskScreen({
     Key? key,
     required this.taskName,
@@ -21,10 +22,25 @@ class EditTaskScreen extends StatelessWidget {
     required this.category,
     required this.id,
   }) : super(key: key);
+
+  @override
+  State<EditTaskScreen> createState() => _EditTaskScreenState();
+}
+
+class _EditTaskScreenState extends State<EditTaskScreen> {
+  DateTime selectedDate = DateTime.now();
+  late String newTaskName;
   TextEditingController controller = TextEditingController();
+
+  @override
+  void initState() {
+    newTaskName = widget.taskName!;
+    controller.text = newTaskName;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    controller.text = taskName!;
     return SafeArea(
       child: Scaffold(
         floatingActionButton: Container(
@@ -55,15 +71,16 @@ class EditTaskScreen extends StatelessWidget {
                 ],
               ),
               onPressed: () {
-                if (taskName != '' && category != '') {
+                if (widget.taskName != '' && widget.category != '') {
                   final Task task = Task(
-                    taskName: controller.text,
-                    category: category,
+                    taskName: newTaskName,
+                    category: widget.category,
+                    date: DateTime.utc(2024).toString(),
                   );
                   Provider.of<TaskData>(context, listen: false)
-                      .editTask(task, id);
+                      .editTask(task, widget.id, task.date.toString());
                   Navigator.pop(context);
-                } else if (taskName == '') {
+                } else if (widget.taskName == '') {
                   showDialog(
                     context: context,
                     builder: (context) {
@@ -78,7 +95,7 @@ class EditTaskScreen extends StatelessWidget {
                       );
                     },
                   );
-                } else if (category == '') {
+                } else if (widget.category == '') {
                   showDialog(
                     context: context,
                     builder: (context) {
@@ -136,6 +153,9 @@ class EditTaskScreen extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(30, 10, 30, 10),
                     child: CupertinoTextField(
                       controller: controller,
+                      onChanged: ((value) {
+                        newTaskName = value;
+                      }),
                       style: const TextStyle(
                         fontSize: 32,
                       ),
@@ -164,27 +184,57 @@ class EditTaskScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: AppColors.backgroundWhite,
-                        borderRadius: BorderRadius.circular(30),
-                        border:
-                            Border.all(color: AppColors.textColorLowEmphacy),
-                      ),
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: const [
-                            Icon(
-                              CupertinoIcons.calendar,
-                              color: AppColors.textColorLowEmphacy,
-                            ),
-                            Text('  Today '),
-                          ],
+                    InkWell(
+                      borderRadius: BorderRadius.circular(30),
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: AppColors.backgroundWhite,
+                          borderRadius: BorderRadius.circular(30),
+                          border:
+                              Border.all(color: AppColors.textColorLowEmphacy),
+                        ),
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                CupertinoIcons.calendar,
+                                color: AppColors.textColorLowEmphacy,
+                              ),
+                              Text(
+                                  '  ${selectedDate.day} - ${selectedDate.month} - ${selectedDate.year} '),
+                            ],
+                          ),
                         ),
                       ),
+                      onTap: () {
+                        showCupertinoModalPopup(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Center(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: catColors[widget.category],
+                                  ),
+                                  height: 200,
+                                  width: 300,
+                                  child: CupertinoDatePicker(
+                                      mode: CupertinoDatePickerMode.date,
+                                      initialDateTime: DateTime.now(),
+                                      minimumDate: DateTime(2022),
+                                      maximumDate: DateTime(3000),
+                                      onDateTimeChanged: (date) {
+                                        setState(() {
+                                          selectedDate = date;
+                                        });
+                                      }),
+                                ),
+                              );
+                            });
+                      },
                     ),
                     const SizedBox(
                       width: 15,
@@ -208,13 +258,13 @@ class EditTaskScreen extends StatelessWidget {
                                 .toList(),
                             customButton: Icon(
                               CupertinoIcons.largecircle_fill_circle,
-                              color: catColors[category],
+                              color: catColors[widget.category],
                             ),
                             onChanged: (value) {
-                              category = value!;
+                              widget.category = value!;
                               Provider.of<CategoriesData>(context,
                                       listen: false)
-                                  .setColor(catColors[category]!);
+                                  .setColor(catColors[widget.category]!);
                             },
                             itemHeight: 48,
                             itemPadding:
@@ -224,7 +274,9 @@ class EditTaskScreen extends StatelessWidget {
                                 const EdgeInsets.symmetric(vertical: 6),
                             dropdownDecoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4),
-                              color: AppColors.secondaryColorSecondary,
+                              color: widget.category != ''
+                                  ? catColors[widget.category]
+                                  : Colors.blue,
                             ),
                             dropdownElevation: 8,
                             offset: const Offset(0, 8),

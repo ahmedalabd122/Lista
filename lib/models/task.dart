@@ -13,11 +13,14 @@ class Task extends HiveObject {
   bool isDone;
   @HiveField(3)
   String category;
+  @HiveField(4)
+  String date;
 
   Task({
     required this.taskName,
     this.isDone = false,
     required this.category,
+    required this.date,
   }) : id = const Uuid().v4();
 
   void toggleDone() {
@@ -26,5 +29,13 @@ class Task extends HiveObject {
 
   void editTaskName(String newName) {
     taskName = newName;
+  }
+
+  void editTaskDate(String newDate) {
+    date = newDate;
+  }
+
+  void editTaskCategory(String newCategory) {
+    category = newCategory;
   }
 }

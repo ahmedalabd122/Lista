@@ -7,11 +7,22 @@ import 'package:lista/models/category.dart';
 import 'package:lista/models/task.dart';
 import 'package:lista/models/task_data.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
-class AddTaskScreen extends StatelessWidget {
+class AddTaskScreen extends StatefulWidget {
   AddTaskScreen({super.key});
+
+  @override
+  State<AddTaskScreen> createState() => _AddTaskScreenState();
+}
+
+class _AddTaskScreenState extends State<AddTaskScreen> {
   String newTaskName = '';
+
   String category = '';
+
+  DateTime selectedDate = DateTime.now();
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -48,6 +59,7 @@ class AddTaskScreen extends StatelessWidget {
                   final Task task = Task(
                     taskName: newTaskName,
                     category: category,
+                    date: selectedDate.toString(),
                   );
                   Provider.of<TaskData>(context, listen: false).addTask(task);
                   Navigator.pop(context);
@@ -154,27 +166,57 @@ class AddTaskScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: AppColors.backgroundWhite,
-                        borderRadius: BorderRadius.circular(30),
-                        border:
-                            Border.all(color: AppColors.textColorLowEmphacy),
-                      ),
-                      alignment: Alignment.center,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: const [
-                            Icon(
-                              CupertinoIcons.calendar,
-                              color: AppColors.textColorLowEmphacy,
-                            ),
-                            Text('  Today '),
-                          ],
+                    InkWell(
+                      borderRadius: BorderRadius.circular(30),
+                      child: Container(
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: AppColors.backgroundWhite,
+                          borderRadius: BorderRadius.circular(30),
+                          border:
+                              Border.all(color: AppColors.textColorLowEmphacy),
+                        ),
+                        alignment: Alignment.center,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                CupertinoIcons.calendar,
+                                color: AppColors.textColorLowEmphacy,
+                              ),
+                              Text(
+                                  '  ${selectedDate.day} - ${selectedDate.month} - ${selectedDate.year} '),
+                            ],
+                          ),
                         ),
                       ),
+                      onTap: () {
+                        showCupertinoModalPopup(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Center(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: catColors[category],
+                                  ),
+                                  height: 200,
+                                  width: 300,
+                                  child: CupertinoDatePicker(
+                                      mode: CupertinoDatePickerMode.date,
+                                      initialDateTime: DateTime.now(),
+                                      minimumDate: DateTime(2022),
+                                      maximumDate: DateTime(3000),
+                                      onDateTimeChanged: (date) {
+                                        setState(() {
+                                          selectedDate = date;
+                                        });
+                                      }),
+                                ),
+                              );
+                            });
+                      },
                     ),
                     const SizedBox(
                       width: 15,
@@ -192,6 +234,8 @@ class AddTaskScreen extends StatelessWidget {
                         create: (context) => CategoriesData(),
                         child: DropdownButtonHideUnderline(
                           child: DropdownButton2(
+                            buttonDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15)),
                             items: Provider.of<CategoriesData>(context)
                                 .categories
                                 .map(buildMenuItem)
@@ -214,7 +258,9 @@ class AddTaskScreen extends StatelessWidget {
                                 const EdgeInsets.symmetric(vertical: 6),
                             dropdownDecoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4),
-                              color: AppColors.secondaryColorSecondary,
+                              color: category != ''
+                                  ? catColors[category]
+                                  : Colors.blue,
                             ),
                             dropdownElevation: 8,
                             offset: const Offset(0, 8),

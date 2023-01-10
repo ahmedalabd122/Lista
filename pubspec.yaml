@@ -52,6 +52,7 @@ dependencies:
   flutter_svg_provider: ^1.0.3
   floodfill_image: ^0.0.8
   card_swiper : ^2.0.4
+  intl: ^0.18.0
 
 dev_dependencies:
   flutter_test:
