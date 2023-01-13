@@ -40,42 +40,42 @@ class TasksScreen extends StatelessWidget {
           ),
         ),
       ),
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: AppColors.backgroundWhite,
-        // leading: const Padding(
-        //   padding: EdgeInsets.only(left: 20),
-        //   child: Icon(
-        //     CupertinoIcons.line_horizontal_3,
-        //     size: 30,
-        //     color: AppColors.backgroundCard,
-        //   ),
-        // ),
-        actions: const [
-          // Padding(
-          //   padding: EdgeInsets.only(left: 15),
-          //   child: Icon(
-          //     CupertinoIcons.search,
-          //     size: 30,
-          //     color: AppColors.backgroundCard,
-          //   ),
-          // ),
-          // Padding(
-          //   padding: EdgeInsets.only(left: 20, right: 20),
-          //   child: Icon(
-          //     Icons.notifications,
-          //     size: 30,
-          //     color: AppColors.backgroundCard,
-          //   ),
-          // ),
-        ],
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   backgroundColor: AppColors.backgroundWhite,
+      //   // leading: const Padding(
+      //   //   padding: EdgeInsets.only(left: 20),
+      //   //   child: Icon(
+      //   //     CupertinoIcons.line_horizontal_3,
+      //   //     size: 30,
+      //   //     color: AppColors.backgroundCard,
+      //   //   ),
+      //   // ),
+      //   actions: const [
+      //     // Padding(
+      //     //   padding: EdgeInsets.only(left: 15),
+      //     //   child: Icon(
+      //     //     CupertinoIcons.search,
+      //     //     size: 30,
+      //     //     color: AppColors.backgroundCard,
+      //     //   ),
+      //     // ),
+      //     // Padding(
+      //     //   padding: EdgeInsets.only(left: 20, right: 20),
+      //     //   child: Icon(
+      //     //     Icons.notifications,
+      //     //     size: 30,
+      //     //     color: AppColors.backgroundCard,
+      //     //   ),
+      //     // ),
+      //   ],
+      // ),
+      body: ListView(
+        scrollDirection: Axis.vertical,
         children: [
           const Padding(
             padding: EdgeInsets.only(
+              top: 20,
               left: 20,
             ),
             child: Text(
@@ -98,7 +98,8 @@ class TasksScreen extends StatelessWidget {
               ),
             ),
           ),
-          const Expanded(
+          Container(
+            height: 150,
             child: CatigoryList(),
           ),
           Row(
@@ -177,15 +178,13 @@ class TasksScreen extends StatelessWidget {
               ),
             ],
           ),
-          Expanded(
-            flex: 3,
-            child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-              decoration: const BoxDecoration(
-                color: AppColors.backgroundWhite,
-              ),
-              child: ListaListView(),
+          Container(
+            height: MediaQuery.of(context).size.height * 3 / 5,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 20,
             ),
+            child: ListaListView(),
           ),
         ],
       ),

@@ -199,12 +199,15 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                           padding: const EdgeInsets.all(8.0),
                           child: Row(
                             children: [
-                              const Icon(
+                              Icon(
                                 CupertinoIcons.calendar,
-                                color: AppColors.textColorLowEmphacy,
+                                color: catColors[widget.category],
                               ),
                               Text(
-                                  '  ${selectedDate.day} - ${selectedDate.month} - ${selectedDate.year} '),
+                                '  ${selectedDate.day} - ${selectedDate.month} - ${selectedDate.year} ',
+                                style: TextStyle(
+                                    color: catColors[widget.category]),
+                              ),
                             ],
                           ),
                         ),

@@ -16,13 +16,10 @@ class ListaListView extends StatelessWidget {
     return Consumer<TaskData>(
       builder: (BuildContext context, taskData, child) {
         return ListView.separated(
-          physics: const BouncingScrollPhysics(
-            parent: AlwaysScrollableScrollPhysics(),
-          ),
+          physics: const BouncingScrollPhysics(),
           itemCount: taskData.taskCount,
           itemBuilder: (BuildContext context, int index) {
             final task = taskData.tasks[index];
-            print(task.date);
             return Dismissible(
               direction: DismissDirection.endToStart,
               resizeDuration: const Duration(
