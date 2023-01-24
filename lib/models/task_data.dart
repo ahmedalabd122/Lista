@@ -73,6 +73,7 @@ class TaskData extends ChangeNotifier {
 
   void updateTask(Task task, int index) async {
     Box<Task> box = await Hive.openBox<Task>(taskHiveBox);
+    index = getIndexById(task.id);
     task.toggleDone();
     if (box.isNotEmpty) await box.putAt(index, task);
     notifyListeners();
@@ -175,12 +176,12 @@ class TaskData extends ChangeNotifier {
   }
 
   List<Task> getDoneTasksByCategory(String category) {
-    List<Task> _gDTBC = [];
-    _gDTBC.addAll(_tasks);
-    _gDTBC.retainWhere(
+    List<Task> gDTBC = [];
+    gDTBC.addAll(_tasks);
+    gDTBC.retainWhere(
         (taskOne) => taskOne.category == category && taskOne.isDone == true);
 
-    return _gDTBC;
+    return gDTBC;
   }
 
   void deleteAllData() async {

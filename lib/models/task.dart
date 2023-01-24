@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:lista/models/category.dart';
 import 'package:uuid/uuid.dart';
@@ -11,16 +12,16 @@ class Task extends HiveObject {
   String taskName;
   @HiveField(2)
   bool isDone;
-  @HiveField(3)
+  @HiveField(3, defaultValue: 'personal')
   String category;
-  @HiveField(4)
+  @HiveField(4, defaultValue: '2022-01-01 00:00:00.000Z')
   String date;
 
   Task({
     required this.taskName,
     this.isDone = false,
-    required this.category,
-    required this.date,
+    this.category = 'personal',
+    this.date = '2022-01-01 00:00:00.000Z',
   }) : id = const Uuid().v4();
 
   void toggleDone() {

@@ -19,8 +19,9 @@ class TaskAdapter extends TypeAdapter<Task> {
     return Task(
       taskName: fields[1] as String,
       isDone: fields[2] as bool,
-      category: fields[3] as String,
-      date: fields[4] as String,
+      category: fields[3] == null ? 'personal' : fields[3] as String,
+      date:
+          fields[4] == null ? '2022-01-01 00:00:00.000Z' : fields[4] as String,
     );
   }
 
