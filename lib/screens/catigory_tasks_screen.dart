@@ -194,13 +194,10 @@ class CatigoryTasksScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: ListaTile(
-                              id: task.id,
-                              taskcategory: task.category,
+                              task: task,
                               index: index,
-                              taskTile: task.taskName,
-                              isChecked: task.isDone,
                               checkBoxCallback: (checkboxState) {
-                                taskData.updateTask(task, index);
+                                taskData.updateTask(task);
                                 if (checkboxState == true) {
                                   audio.play(
                                     AssetSource('done.wav'),

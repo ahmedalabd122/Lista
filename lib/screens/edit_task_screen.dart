@@ -1,26 +1,20 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:lista/models/categories_data.dart';
-import 'package:lista/models/category.dart';
 import 'package:provider/provider.dart';
 
 import 'package:lista/data/theme.dart';
+import 'package:lista/models/categories_data.dart';
+import 'package:lista/models/category.dart';
 import 'package:lista/models/task.dart';
 import 'package:lista/models/task_data.dart';
 
 class EditTaskScreen extends StatefulWidget {
-  String? taskName;
-  final int index;
-  String category;
-  String id;
+  Task task;
 
   EditTaskScreen({
     Key? key,
-    required this.taskName,
-    required this.index,
-    required this.category,
-    required this.id,
+    required this.task,
   }) : super(key: key);
 
   @override
@@ -28,14 +22,12 @@ class EditTaskScreen extends StatefulWidget {
 }
 
 class _EditTaskScreenState extends State<EditTaskScreen> {
-  DateTime selectedDate = DateTime.now();
   late String newTaskName;
   TextEditingController controller = TextEditingController();
 
   @override
   void initState() {
-    newTaskName = widget.taskName!;
-    controller.text = newTaskName;
+    controller.text = widget.task.taskName;
     super.initState();
   }
 
@@ -71,16 +63,20 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                 ],
               ),
               onPressed: () {
-                if (widget.taskName != '' && widget.category != '') {
-                  final Task task = Task(
-                    taskName: newTaskName,
-                    category: widget.category,
-                    date: DateTime.utc(2024).toString(),
+                if (widget.task.taskName != '' && widget.task.category != '') {
+                  // final Task newTask = Task(
+                  //   taskName: newTaskName,
+                  //   category: widget.task.category,
+                  //   date: widget.task.date,
+                  // );
+
+                  debugPrint(widget.task.taskName);
+
+                  Provider.of<TaskData>(context, listen: false).editTask(
+                    widget.task,
                   );
-                  Provider.of<TaskData>(context, listen: false)
-                      .editTask(task, widget.id, task.date.toString());
                   Navigator.pop(context);
-                } else if (widget.taskName == '') {
+                } else if (widget.task.taskName == '') {
                   showDialog(
                     context: context,
                     builder: (context) {
@@ -95,7 +91,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                       );
                     },
                   );
-                } else if (widget.category == '') {
+                } else if (widget.task.category == '') {
                   showDialog(
                     context: context,
                     builder: (context) {
@@ -154,7 +150,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                     child: CupertinoTextField(
                       controller: controller,
                       onChanged: ((value) {
-                        newTaskName = value;
+                        widget.task.taskName = value;
                       }),
                       style: const TextStyle(
                         fontSize: 32,
@@ -201,12 +197,12 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                             children: [
                               Icon(
                                 CupertinoIcons.calendar,
-                                color: catColors[widget.category],
+                                color: catColors[widget.task.category],
                               ),
                               Text(
-                                '  ${selectedDate.day} - ${selectedDate.month} - ${selectedDate.year} ',
+                                '  ${widget.task.date.substring(0, 10)} ',
                                 style: TextStyle(
-                                    color: catColors[widget.category]),
+                                    color: catColors[widget.task.category]),
                               ),
                             ],
                           ),
@@ -220,7 +216,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                                 child: Container(
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(20),
-                                    color: catColors[widget.category],
+                                    color: catColors[widget.task.category],
                                   ),
                                   height: 200,
                                   width: 300,
@@ -231,7 +227,7 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                                       maximumDate: DateTime(3000),
                                       onDateTimeChanged: (date) {
                                         setState(() {
-                                          selectedDate = date;
+                                          widget.task.date = date.toString();
                                         });
                                       }),
                                 ),
@@ -261,13 +257,13 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                                 .toList(),
                             customButton: Icon(
                               CupertinoIcons.largecircle_fill_circle,
-                              color: catColors[widget.category],
+                              color: catColors[widget.task.category],
                             ),
                             onChanged: (value) {
-                              widget.category = value!;
+                              widget.task.category = value!;
                               Provider.of<CategoriesData>(context,
                                       listen: false)
-                                  .setColor(catColors[widget.category]!);
+                                  .setColor(catColors[widget.task.category]!);
                             },
                             itemHeight: 48,
                             itemPadding:
@@ -277,8 +273,8 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
                                 const EdgeInsets.symmetric(vertical: 6),
                             dropdownDecoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(4),
-                              color: widget.category != ''
-                                  ? catColors[widget.category]
+                              color: widget.task.category != ''
+                                  ? catColors[widget.task.category]
                                   : Colors.blue,
                             ),
                             dropdownElevation: 8,

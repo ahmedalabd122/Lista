@@ -64,40 +64,49 @@ class TaskData extends ChangeNotifier {
 
   void addTask(Task task) async {
     Box<Task> box = await Hive.openBox<Task>(taskHiveBox);
-    _tasks.add(task);
     await box.add(task);
     _tasks = box.values.toList();
     sortByDate();
     notifyListeners();
   }
 
-  void updateTask(Task task, int index) async {
-    Box<Task> box = await Hive.openBox<Task>(taskHiveBox);
-    index = getIndexById(task.id);
+  void updateTask(
+    Task task,
+  ) async {
     task.toggleDone();
-    if (box.isNotEmpty) await box.putAt(index, task);
+    Box<Task> box = await Hive.openBox<Task>(taskHiveBox);
+    dynamic k = box.keys.firstWhere((element) => box.get(element) == task);
+    if (box.isNotEmpty) {
+      await box.put(k, task);
+    }
     notifyListeners();
   }
 
   int getIndexById(String id) {
     int index = 0;
     index = _tasks.indexWhere((element) => element.id == id);
+    debugPrint('$index');
     return index;
   }
 
-  void editTask(Task task, String id, String date) async {
+  void editTask(Task task) async {
     Box<Task> box = await Hive.openBox<Task>(taskHiveBox);
-    task.editTaskName(task.taskName);
-    int index = getIndexById(id);
-    _tasks[index].taskName = task.taskName;
-    _tasks[index].date = task.date;
-    if (box.isNotEmpty) await box.putAt(index, task);
+
+    if (box.isNotEmpty) {
+      dynamic k = await box.keys.firstWhere((element) {
+        if (box.get(element)!.id == task.id) debugPrint('editTask');
+        return box.get(element)!.id == task.id;
+      });
+      await box.put(k, task);
+    } else {
+      await box.add(task);
+    }
+
     getItems();
   }
 
   Future deleteTask(int index) async {
     Box<Task> box = await Hive.openBox<Task>(taskHiveBox);
-    _tasks.removeAt(index);
     if (box.isNotEmpty) {
       await box.deleteAt(index);
       getItems();

@@ -7,28 +7,23 @@ import 'package:lista/widgets/lista_checkbox.dart';
 import 'package:page_transition/page_transition.dart';
 
 class ListaTile extends StatelessWidget {
-  final bool isChecked;
-  final String taskTile;
   final Function(bool?)? checkBoxCallback;
   final int index;
-  final String taskcategory;
-  String id;
+  Task task;
+
   ListaTile({
     super.key,
-    required this.isChecked,
-    required this.taskTile,
+    required this.task,
     required this.checkBoxCallback,
     required this.index,
-    required this.taskcategory,
-    required this.id,
   });
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: ListaCheckBox(
-        color: catColors[taskcategory],
-        checkBoxState: isChecked,
+        color: catColors[task.category],
+        checkBoxState: task.isDone,
         toggleCheckboxState: checkBoxCallback,
       ),
       title: GestureDetector(
@@ -38,10 +33,7 @@ class ListaTile extends StatelessWidget {
             PageTransition(
               type: PageTransitionType.fade,
               child: EditTaskScreen(
-                id: id,
-                category: taskcategory,
-                index: index,
-                taskName: taskTile,
+                task: task,
               ),
             ),
           );
@@ -49,9 +41,9 @@ class ListaTile extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(
-            taskTile,
+            task.taskName,
             style: TextStyle(
-              decoration: isChecked ? TextDecoration.lineThrough : null,
+              decoration: task.isDone ? TextDecoration.lineThrough : null,
               fontSize: 16,
               fontWeight: FontWeight.w500,
               color: AppColors.textColorHighEmphacy,

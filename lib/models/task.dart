@@ -20,8 +20,8 @@ class Task extends HiveObject {
   Task({
     required this.taskName,
     this.isDone = false,
-    this.category = 'personal',
-    this.date = '2022-01-01 00:00:00.000Z',
+    required this.category,
+    required this.date,
   }) : id = const Uuid().v4();
 
   void toggleDone() {
