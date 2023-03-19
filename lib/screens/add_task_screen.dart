@@ -6,6 +6,7 @@ import 'package:lista/models/categories_data.dart';
 import 'package:lista/models/category.dart';
 import 'package:lista/models/task.dart';
 import 'package:lista/models/task_data.dart';
+import 'package:lista/widgets/catigory_selector.dart';
 import 'package:provider/provider.dart';
 
 class AddTaskScreen extends StatefulWidget {
@@ -26,32 +27,24 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: Container(
-        width: 235,
+        width: double.infinity,
+        margin: EdgeInsets.only(left: 30),
         decoration: BoxDecoration(
           boxShadow: const [
             BoxShadow(
-              color: AppColors.secondaryColorSecondary,
-              offset: Offset(3, 5.0), //(x,y)
-              blurRadius: 10,
+              color: AppColors.backgroundCard,
+              offset: Offset(0, 0), //(x,y)
+              blurRadius: 1,
             ),
           ],
           borderRadius: BorderRadius.circular(50),
         ),
         child: CupertinoButton(
-            alignment: Alignment.centerRight,
+            alignment: Alignment.center,
             borderRadius: const BorderRadius.all(Radius.circular(50.0)),
-            minSize: 70,
+            //minSize: 70,
             color: AppColors.secondaryColorSecondary,
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
-                Text('New Task  '),
-                Icon(
-                  CupertinoIcons.chevron_up,
-                ),
-              ],
-            ),
+            child: const Text('New Task'),
             onPressed: () {
               if (newTaskName != '' && category != '') {
                 final Task task = Task(
@@ -182,7 +175,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                           children: [
                             Icon(
                               CupertinoIcons.calendar,
-                              color: category != ''
+                              color: CatigorySelector != ''
                                   ? catColors[category]
                                   : Colors.blue,
                             ),
@@ -226,7 +219,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   ),
                   Container(
                     height: 50,
-                    width: 50,
+                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
                     decoration: BoxDecoration(
                       color: AppColors.backgroundWhite,
                       borderRadius: BorderRadius.circular(30),
@@ -242,11 +235,23 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                               .categories
                               .map(buildMenuItem)
                               .toList(),
-                          customButton: Icon(
-                            CupertinoIcons.largecircle_fill_circle,
-                            color: category != ''
-                                ? catColors[category]
-                                : Colors.blue,
+                          customButton: Row(
+                            children: [
+                              Icon(
+                                CupertinoIcons.largecircle_fill_circle,
+                                color: category != ''
+                                    ? catColors[category]
+                                    : Colors.blue,
+                              ),
+                              Text(
+                                category != '' ? ' $category' : ' category',
+                                style: TextStyle(
+                                  color: category != ''
+                                      ? catColors[category]
+                                      : Colors.blue,
+                                ),
+                              ),
+                            ],
                           ),
                           onChanged: (value) {
                             setState(() {
@@ -273,6 +278,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                         ),
                       ),
                     ),
+                  ),
+                  CatigorySelector(
+                    category: category,
                   ),
                 ],
               ),

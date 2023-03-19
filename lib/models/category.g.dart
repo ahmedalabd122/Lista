@@ -17,7 +17,7 @@ class CategoryAdapter extends TypeAdapter<Category> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return Category(
-      category: fields[0] as String,
+      category: fields[0] == null ? 'personal' : fields[0] as String,
     );
   }
 

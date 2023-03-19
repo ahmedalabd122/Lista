@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:lista/data/theme.dart';
+import 'package:lista/models/task.dart';
 import 'package:provider/provider.dart';
 import 'dart:math';
 import 'package:lista/models/task_data.dart';
@@ -10,6 +11,8 @@ import 'package:lista/widgets/tasks_tile.dart';
 class ListaListView extends StatelessWidget {
   AudioPlayer audio = AudioPlayer(playerId: '1');
   AudioPlayer audio2 = AudioPlayer(playerId: '2');
+
+  void updateTaskOrder(int oldIndex, int newIndex) {}
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +77,7 @@ class ListaListView extends StatelessWidget {
               key: Key(task.id.toString()),
               onDismissed: (direction) {
                 audio2.play(AssetSource('bravo.wav'));
-                taskData.deleteTask(index);
+                taskData.deleteTask(task);
               },
               child: Card(
                 elevation: 5,
@@ -83,7 +86,6 @@ class ListaListView extends StatelessWidget {
                 ),
                 child: ListaTile(
                   task: task,
-                  index: index,
                   checkBoxCallback: (checkboxState) {
                     taskData.updateTask(
                       task,

@@ -11,12 +11,13 @@ import 'task.dart';
 class TaskData extends ChangeNotifier {
   List<Task> _tasks = [];
 
-  UnmodifiableListView<Task> get tasks => UnmodifiableListView(_tasks);
+  List<Task> get tasks => _tasks;
   final String taskHiveBox = 'task-box';
 
   TaskData() {
     getItems();
   }
+
 
   void getItems() async {
     Box<Task> box = await Hive.openBox<Task>(taskHiveBox);
@@ -105,9 +106,10 @@ class TaskData extends ChangeNotifier {
     getItems();
   }
 
-  Future deleteTask(int index) async {
+  Future deleteTask(Task task) async {
     Box<Task> box = await Hive.openBox<Task>(taskHiveBox);
     if (box.isNotEmpty) {
+      int index = getIndexById(task.id);
       await box.deleteAt(index);
       getItems();
     } else {
@@ -117,11 +119,12 @@ class TaskData extends ChangeNotifier {
 
   Future deleteTaskFromCategory(String id) async {
     Box<Task> box = await Hive.openBox<Task>(taskHiveBox);
-    _tasks.removeWhere((task) => task.id == id);
     if (box.isNotEmpty) {
       _tasks.removeWhere((task) => task.id == id);
-      await box.clear();
-      box.addAll(_tasks);
+      dynamic k = await box.keys.firstWhere((element) {
+        return box.get(element)!.id == id;
+      });
+      await box.delete(k);
       getItems();
     } else {
       getItems();

@@ -195,7 +195,6 @@ class CatigoryTasksScreen extends StatelessWidget {
                             ),
                             child: ListaTile(
                               task: task,
-                              index: index,
                               checkBoxCallback: (checkboxState) {
                                 taskData.updateTask(task);
                                 if (checkboxState == true) {

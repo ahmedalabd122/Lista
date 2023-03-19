@@ -8,14 +8,12 @@ import 'package:page_transition/page_transition.dart';
 
 class ListaTile extends StatelessWidget {
   final Function(bool?)? checkBoxCallback;
-  final int index;
   Task task;
 
   ListaTile({
     super.key,
     required this.task,
     required this.checkBoxCallback,
-    required this.index,
   });
 
   @override

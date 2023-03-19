@@ -36,42 +36,31 @@ class _EditTaskScreenState extends State<EditTaskScreen> {
     return SafeArea(
       child: Scaffold(
         floatingActionButton: Container(
-          width: 235,
+          width: double.infinity,
+          margin: const EdgeInsets.only(left: 30),
           decoration: BoxDecoration(
             boxShadow: const [
               BoxShadow(
-                color: AppColors.secondaryColorSecondary,
-                offset: Offset(3, 5.0), //(x,y)
-                blurRadius: 10,
+                color: AppColors.backgroundCard,
+                offset: Offset(0, 0), //(x,y)
+                blurRadius: 1,
               ),
             ],
             borderRadius: BorderRadius.circular(50),
           ),
           child: CupertinoButton(
-              alignment: Alignment.centerRight,
-              borderRadius: const BorderRadius.all(Radius.circular(50.0)),
-              minSize: 70,
-              color: AppColors.secondaryColorSecondary,
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Text('Edit Task  '),
-                  Icon(
-                    CupertinoIcons.chevron_up,
-                  ),
-                ],
+              alignment: Alignment.center,
+              borderRadius: const BorderRadius.all(
+                Radius.circular(
+                  50.0,
+                ),
               ),
+              // minSize: 70,
+              color: AppColors.secondaryColorSecondary,
+              child: const Text('Edit Task'),
               onPressed: () {
                 if (widget.task.taskName != '' && widget.task.category != '') {
-                  // final Task newTask = Task(
-                  //   taskName: newTaskName,
-                  //   category: widget.task.category,
-                  //   date: widget.task.date,
-                  // );
-
                   debugPrint(widget.task.taskName);
-
                   Provider.of<TaskData>(context, listen: false).editTask(
                     widget.task,
                   );

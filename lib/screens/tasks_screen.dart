@@ -70,45 +70,31 @@ class TasksScreen extends StatelessWidget {
       //     // ),
       //   ],
       // ),
-      body: ListView(
-        scrollDirection: Axis.vertical,
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(
-              top: 20,
-              left: 20,
-            ),
-            child: Text(
-              'What\'s up!',
-              style: TextStyle(
-                color: AppColors.backgroundDark,
-                fontWeight: FontWeight.bold,
-                fontSize: 40,
-              ),
-              textAlign: TextAlign.start,
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
-            child: Text(
-              'CATEGORIES',
-              style: TextStyle(
-                color: Color.fromARGB(146, 9, 32, 51),
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ),
-          Container(
-            height: 150,
-            child: CatigoryList(),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const Padding(
-                padding: EdgeInsets.only(left: 20, bottom: 0),
+                padding: EdgeInsets.only(
+                  top: 20,
+                  left: 20,
+                ),
                 child: Text(
-                  'TODAY\'S TASKS',
+                  'What\'s up!',
+                  style: TextStyle(
+                    color: AppColors.backgroundDark,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 40,
+                  ),
+                  textAlign: TextAlign.start,
+                ),
+              ),
+              const Padding(
+                padding: EdgeInsets.only(left: 20, top: 10, bottom: 10),
+                child: Text(
+                  'CATEGORIES',
                   style: TextStyle(
                     color: Color.fromARGB(146, 9, 32, 51),
                     fontWeight: FontWeight.w500,
@@ -116,77 +102,96 @@ class TasksScreen extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 15,
+                height: 150,
+                child: CatigoryList(),
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  if (Provider.of<TaskData>(context).taskCount > 1)
-                    CupertinoButton(
-                      child: const Text(
-                        'Delete all',
-                        style: TextStyle(
-                          color: Colors.red,
-                          fontSize: 15,
-                          fontWeight: FontWeight.normal,
-                        ),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 20, bottom: 0),
+                    child: Text(
+                      'TODAY\'S TASKS',
+                      style: TextStyle(
+                        color: Color.fromARGB(146, 9, 32, 51),
+                        fontWeight: FontWeight.w500,
                       ),
-                      onPressed: () {
-                        showCupertinoDialog(
-                          context: context,
-                          builder: ((context) {
-                            return CupertinoAlertDialog(
-                              title: const Text(
-                                'Do you want to delete all tasks?',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.red,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                              actions: [
-                                CupertinoDialogAction(
-                                  child: const Text('Yes'),
-                                  onPressed: () {
-                                    Provider.of<TaskData>(context,
-                                            listen: false)
-                                        .deleteAllData();
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                                CupertinoDialogAction(
-                                  child: const Text('Cancel'),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                ),
-                              ],
-                            );
-                          }),
-                        );
-                      },
                     ),
-                  if (Provider.of<TaskData>(context).taskCount <= 1)
-                    const SizedBox(
-                      height: 50,
-                    ),
+                  ),
                   const SizedBox(
-                    width: 25,
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      if (Provider.of<TaskData>(context).taskCount > 1)
+                        CupertinoButton(
+                          child: const Text(
+                            'Delete all',
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 15,
+                              fontWeight: FontWeight.normal,
+                            ),
+                          ),
+                          onPressed: () {
+                            showCupertinoDialog(
+                              context: context,
+                              builder: ((context) {
+                                return CupertinoAlertDialog(
+                                  title: const Text(
+                                    'Do you want to delete all tasks?',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.red,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                  actions: [
+                                    CupertinoDialogAction(
+                                      child: const Text('Yes'),
+                                      onPressed: () {
+                                        Provider.of<TaskData>(context,
+                                                listen: false)
+                                            .deleteAllData();
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    CupertinoDialogAction(
+                                      child: const Text('Cancel'),
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  ],
+                                );
+                              }),
+                            );
+                          },
+                        ),
+                      if (Provider.of<TaskData>(context).taskCount <= 1)
+                        const SizedBox(
+                          height: 50,
+                        ),
+                      const SizedBox(
+                        width: 25,
+                      ),
+                    ],
                   ),
                 ],
               ),
+              Container(
+                height: MediaQuery.of(context).size.height * 3 / 5.1,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 20,
+                ),
+                child: ListaListView(),
+              ),
             ],
           ),
-          Container(
-            height: MediaQuery.of(context).size.height * 3 / 5,
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 20,
-            ),
-            child: ListaListView(),
-          ),
-        ],
+        ),
       ),
     );
   }
