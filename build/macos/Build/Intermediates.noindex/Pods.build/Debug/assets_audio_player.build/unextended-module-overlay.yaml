@@ -1,0 +1,14 @@
+{
+  'version': 0,
+  'use-external-names': 'false',
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': "/Users/ahmedmohamedalabd/Dev/Lista/build/macos/Build/Products/Debug/assets_audio_player/assets_audio_player.framework/Modules"
+    'contents': [{
+      'type': 'file',
+      'name': "module.modulemap",
+      'external-contents': "/Users/ahmedmohamedalabd/Dev/Lista/build/macos/Build/Intermediates.noindex/Pods.build/Debug/assets_audio_player.build/unextended-module.modulemap",
+    }]
+  }]
+}

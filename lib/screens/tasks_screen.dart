@@ -72,6 +72,7 @@ class TasksScreen extends StatelessWidget {
       // ),
       body: SafeArea(
         child: SingleChildScrollView(
+          //physics: NeverScrollableScrollPhysics(),
           scrollDirection: Axis.vertical,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

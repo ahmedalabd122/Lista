@@ -1,0 +1,8 @@
+version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
+options: "7b4ad6cbdc34c4fe7e40668dc00e017d10ae8aa0586e259ca3c90eca0ea8ae82"
+build_start_time: [1679792548, 296211004]
+build_end_time: [1679792558, 416579961]
+inputs:
+  "/Users/ahmedmohamedalabd/.pub-cache/hosted/pub.dev/assets_audio_player-3.0.6/macos/Classes/AssetsAudioPlayer.swift": [1679226486, 215641975]
+  "/Users/ahmedmohamedalabd/.pub-cache/hosted/pub.dev/assets_audio_player-3.0.6/macos/Classes/AssetsAudioPlayerPlugin.swift": [1679226486, 215529918]
+  "/Users/ahmedmohamedalabd/.pub-cache/hosted/pub.dev/assets_audio_player-3.0.6/macos/Classes/Music.swift": [1679226486, 215400695]

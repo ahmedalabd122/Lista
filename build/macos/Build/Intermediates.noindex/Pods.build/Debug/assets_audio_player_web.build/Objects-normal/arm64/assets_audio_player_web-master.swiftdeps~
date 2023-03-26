@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
+options: "2025360641ca02ce98c58ed551eb4d662c8f253ef17e483e792a807c79e696be"
+build_start_time: [1679792548, 295877933]
+build_end_time: [1679792548, 325614929]
+inputs:
+  "/Users/ahmedmohamedalabd/.pub-cache/hosted/pub.dev/assets_audio_player_web-3.0.6/macos/Classes/AssetsAudioPlayerWebPlugin.swift": !private [1679225963, 212177276]

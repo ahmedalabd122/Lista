@@ -241,14 +241,14 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                                 CupertinoIcons.largecircle_fill_circle,
                                 color: category != ''
                                     ? catColors[category]
-                                    : Colors.blue,
+                                    : Colors.black54,
                               ),
                               Text(
                                 category != '' ? ' $category' : ' category',
                                 style: TextStyle(
                                   color: category != ''
                                       ? catColors[category]
-                                      : Colors.blue,
+                                      : Colors.black54,
                                 ),
                               ),
                             ],
@@ -271,7 +271,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                             borderRadius: BorderRadius.circular(4),
                             color: category != ''
                                 ? catColors[category]
-                                : Colors.blue,
+                                : Colors.black38,
                           ),
                           dropdownElevation: 8,
                           offset: const Offset(0, 8),
@@ -279,9 +279,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       ),
                     ),
                   ),
-                  CatigorySelector(
-                    category: category,
-                  ),
+                  // CatigorySelector(
+                  //   category: category,
+                  // ),
                 ],
               ),
             ],

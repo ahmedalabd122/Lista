@@ -182,14 +182,18 @@ class RetroSliderTrackShape extends SliderTrackShape {
   }
 
   @override
-  void paint(PaintingContext context, Offset offset,
-      {required RenderBox parentBox,
-      required SliderThemeData sliderTheme,
-      required Animation<double> enableAnimation,
-      required Offset thumbCenter,
-      bool isEnabled = true,
-      bool isDiscrete = false,
-      required TextDirection textDirection}) {
+  void paint(
+    PaintingContext context,
+    Offset offset, {
+    required RenderBox parentBox,
+    required SliderThemeData sliderTheme,
+    required Animation<double> enableAnimation,
+    required Offset thumbCenter,
+    Offset? secondaryOffset,
+    bool isEnabled = true,
+    bool isDiscrete = false,
+    required TextDirection textDirection,
+  }) {
     final Canvas canvas = context.canvas;
 
     final rect = Rect.fromPoints(offset, offset);
@@ -245,14 +249,18 @@ class RoundSliderTrackShape extends SliderTrackShape {
   }
 
   @override
-  void paint(PaintingContext context, Offset offset,
-      {required RenderBox parentBox,
-      required SliderThemeData sliderTheme,
-      required Animation<double> enableAnimation,
-      required Offset thumbCenter,
-      bool isEnabled = true,
-      bool isDiscrete = false,
-      required TextDirection textDirection}) {
+  void paint(
+    PaintingContext context,
+    Offset offset, {
+    required RenderBox parentBox,
+    required SliderThemeData sliderTheme,
+    required Animation<double> enableAnimation,
+    required Offset thumbCenter,
+    Offset? secondaryOffset,
+    bool isEnabled = true,
+    bool isDiscrete = false,
+    required TextDirection textDirection,
+  }) {
     if (sliderTheme.trackHeight == 0) {
       return;
     }
